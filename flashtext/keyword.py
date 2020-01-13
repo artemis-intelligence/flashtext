@@ -1,6 +1,7 @@
 import os
 import string
 import io
+import unicodedata
 
 
 class KeywordProcessor(object):
@@ -584,6 +585,7 @@ class KeywordProcessor(object):
         orig_sentence = sentence
         if not self.case_sensitive:
             sentence = sentence.lower()
+            sentence = "".join(c for c in sentence if unicodedata.combining(c) == 0)
         current_word = ''
         current_dict = self.keyword_trie_dict
         current_white_space = ''
